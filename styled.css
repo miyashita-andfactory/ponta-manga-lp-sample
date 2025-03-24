@@ -29,7 +29,11 @@ a {
   color: inherit;
 }
 
-/* custom template */
+/**
+ custom template
+===================== */
+
+/* mainVisual_A (ボタン1つパターン) */
 .mainVisual_A {
   position: relative;
   background: #eb340c;
@@ -41,4 +45,76 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+/* mainVisual_B (ボタン3つ[メインボタン + アンカー2]パターン) */
+.mainVisual_B {
+  position: relative;
+  background: #ff9d30;
+}
+
+.mainVisual_B .mainVisual-button-area {
+  display: flex;
+  padding: 1.6rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6rem;
+  align-self: stretch;
+}
+
+.mainVisual_B .mainVisual-anker-area {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  align-self: stretch;
+}
+
+/* grid_A (書影３列_ボタンなし) */
+.grid_A {
+  display: flex;
+  padding: 4rem 1.6rem 6rem 1.6rem;
+  flex-direction: column;
+  gap: 1.6rem;
+  background: #eec800;
+}
+.grid_A .grid-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem 0.8rem;
+  list-style: none;
+}
+
+.grid_A .grid-item {
+  border: 2px solid #420403;
+}
+
+.grid_A .grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* grid_B (書影３列_ボタン１) */
+.grid_B {
+  display: flex;
+  padding: 0 0.9rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.8rem;
+  align-self: stretch;
+}
+
+.grid_B .grid-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.grid_B .grid-item {
+  display: flex;
+  padding: 0.25rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
