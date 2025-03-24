@@ -1,0 +1,44 @@
+html {
+  scroll-behavior: smooth;
+  font-size: 62.5%;
+}
+
+body {
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: 'A P-OTF Shin Maru Go Pr6N', 'M PLUS Rounded 1c', sans-serif;
+  background-color: #f85127;
+  font-style: normal;
+}
+
+/* グローバルリセット */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* custom template */
+.mainVisual_A {
+  position: relative;
+  background: #eb340c;
+}
+
+.mainVisual_A .mainVisual-button {
+  display: flex;
+  padding: 0 1.6rem 4rem 1.6rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

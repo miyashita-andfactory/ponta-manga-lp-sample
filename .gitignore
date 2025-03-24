@@ -1,0 +1,12 @@
+# mac hidden files
+.DS_Store
+
+##other
+node_modules/
+.tmp
+*.psd
+
+# vscode
+/.vscode/
+
+dist/
