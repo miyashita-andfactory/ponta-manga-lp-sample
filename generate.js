@@ -34,16 +34,16 @@ async function main() {
           '<html><head></head><body><div class="container"></div></body></html>',
         );
 
-        // head構築
         const originalHead = $('head').clone();
         originalHead.find('title').remove();
         originalHead.find('link[href="styled.css"]').remove();
         originalHead.append(`<title>${title}</title>`);
-        originalHead.append(`<link rel="stylesheet" href="styled.css">`);
+        originalHead.append(`<link rel="stylesheet" href="./styled.css">`);
         newDoc('head').replaceWith(originalHead);
 
-        // セクション追加とclass抽出
         let classSet = new Set();
+        let imageSet = new Set();
+
         selectedIds.forEach((id) => {
           const section = $(`#${id}`);
           if (section.length) {
@@ -58,12 +58,18 @@ async function main() {
               const classes = ($(el).attr('class') || '').split(/\s+/);
               classes.forEach((cls) => classSet.add(cls));
             });
+
+            section.find('img').each((_, img) => {
+              const src = $(img).attr('src');
+              if (src && src.startsWith('images/')) {
+                imageSet.add(src);
+              }
+            });
           } else {
             console.warn(`⚠️ セクションID "${id}" は見つかりませんでした`);
           }
         });
 
-        // 共通ベースCSS
         const baseCSS = `
           html {
             scroll-behavior: smooth;
@@ -94,9 +100,8 @@ async function main() {
             text-decoration: none;
             color: inherit;
           }
-          `;
+        `;
 
-        // styled.css から必要なCSSだけ抽出
         const cssPath = './styled.css';
         let filteredCSS = '';
         if (fs.existsSync(cssPath)) {
@@ -110,7 +115,6 @@ async function main() {
           });
         }
 
-        // dist構成
         const distDir = './dist';
         const imagesDir = path.join(distDir, 'images');
         const jsDir = path.join(distDir, 'js');
@@ -122,17 +126,33 @@ async function main() {
         fs.mkdirSync(imagesDir);
         fs.mkdirSync(jsDir);
 
-        // styles.css 出力（共通CSS + 抽出CSS）
-        const finalCSS = baseCSS + '\n\n' + (filteredCSS || '/* styles.css is empty */');
-        fs.writeFileSync(path.join(distDir, 'styles.css'), finalCSS, 'utf-8');
+        // 使用された画像をコピー
+        imageSet.forEach((relativePath) => {
+          const srcPath = path.join('./', relativePath);
+          const destPath = path.join('./dist/', relativePath);
+          const destDir = path.dirname(destPath);
 
-        // index.html を整形して出力
+          if (!fs.existsSync(destDir)) {
+            fs.mkdirSync(destDir, { recursive: true });
+          }
+
+          if (fs.existsSync(srcPath)) {
+            fs.copyFileSync(srcPath, destPath);
+            console.log(`🖼 画像コピー: ${relativePath}`);
+          } else {
+            console.warn(`⚠️ 画像が見つかりません: ${srcPath}`);
+          }
+        });
+
+        const finalCSS = baseCSS + '\n\n' + (filteredCSS || '/* styled.css is empty */');
+        fs.writeFileSync(path.join(distDir, './styled.css'), finalCSS, 'utf-8');
+
         const prettyHtml = await prettier.format(newDoc.html(), { parser: 'html' });
         const finalHtml = '<!DOCTYPE html>\n' + prettyHtml.replace(/<!doctype html>\n?/i, '');
         fs.writeFileSync(path.join(distDir, 'index.html'), finalHtml, 'utf-8');
 
         console.log(`\n✅ dist/index.html を整形して出力しました`);
-        console.log(`🎨 styles.css に共通CSS + 使用セクションのCSSを出力しました`);
+        console.log(`🎨 styled.css に共通CSS + 使用セクションのCSSを出力しました`);
         rl.close();
       },
     );
