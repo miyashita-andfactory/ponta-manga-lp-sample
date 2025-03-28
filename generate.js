@@ -38,7 +38,7 @@ async function main() {
         originalHead.find('title').remove();
         originalHead.find('link[href="styled.css"]').remove();
         originalHead.append(`<title>${title}</title>`);
-        originalHead.append(`<link rel="stylesheet" href="./styled.css">`);
+        originalHead.append(`<link rel="stylesheet" href="styled.css">`);
         newDoc('head').replaceWith(originalHead);
 
         let classSet = new Set();
@@ -61,8 +61,9 @@ async function main() {
 
             section.find('img').each((_, img) => {
               const src = $(img).attr('src');
-              if (src && src.startsWith('images/')) {
-                imageSet.add(src);
+              if (src && src.includes('images/')) {
+                const cleanPath = src.replace(/^\/?/, '');
+                imageSet.add(cleanPath);
               }
             });
           } else {
@@ -123,10 +124,9 @@ async function main() {
           fs.rmSync(distDir, { recursive: true });
         }
         fs.mkdirSync(distDir);
-        fs.mkdirSync(imagesDir);
+        fs.mkdirSync(imagesDir, { recursive: true });
         fs.mkdirSync(jsDir);
 
-        // 使用された画像をコピー
         imageSet.forEach((relativePath) => {
           const srcPath = path.join('./', relativePath);
           const destPath = path.join('./dist/', relativePath);
@@ -144,15 +144,17 @@ async function main() {
           }
         });
 
-        const finalCSS = baseCSS + '\n\n' + (filteredCSS || '/* styled.css is empty */');
-        fs.writeFileSync(path.join(distDir, './styled.css'), finalCSS, 'utf-8');
+        const finalCSS = baseCSS + '\n\n' + (filteredCSS || '/* styles.css is empty */');
+        fs.writeFileSync(path.join(distDir, 'styles.css'), finalCSS, 'utf-8');
 
         const prettyHtml = await prettier.format(newDoc.html(), { parser: 'html' });
-        const finalHtml = '<!DOCTYPE html>\n' + prettyHtml.replace(/<!doctype html>\n?/i, '');
+        const finalHtml =
+          '<!DOCTYPE html>\n' +
+          prettyHtml.replace(/<!doctype html>\n?/i, '').replace(/&amp;/g, '&');
         fs.writeFileSync(path.join(distDir, 'index.html'), finalHtml, 'utf-8');
 
         console.log(`\n✅ dist/index.html を整形して出力しました`);
-        console.log(`🎨 styled.css に共通CSS + 使用セクションのCSSを出力しました`);
+        console.log(`🎨 styles.css に共通CSS + 使用セクションのCSSを出力しました`);
         rl.close();
       },
     );
