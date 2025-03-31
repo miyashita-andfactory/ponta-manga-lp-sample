@@ -33,7 +33,8 @@ a {
  custom template
 ===================== */
 
-/* mainVisual_A (ボタン1つパターン) */
+/* mainVisual_A */
+/* === (ボタン1つパターン) === */
 .mainVisual_A {
   position: relative;
   background: #eb340c;
@@ -47,7 +48,8 @@ a {
   align-items: center;
 }
 
-/* mainVisual_B (ボタン3つ[メインボタン + アンカー2]パターン) */
+/* mainVisual_B */
+/* === (ボタン3つ[メインボタン + アンカー2]パターン) === */
 .mainVisual_B {
   position: relative;
   background: #ff9d30;
@@ -70,7 +72,8 @@ a {
   align-self: stretch;
 }
 
-/* grid_A (書影３列_ボタンなし) */
+/* grid_A */
+/* === (書影３列_ボタンなし) === */
 .grid_A {
   display: flex;
   padding: 4rem 1.6rem 6rem 1.6rem;
@@ -95,10 +98,11 @@ a {
   object-fit: contain;
 }
 
-/* grid_B (書影３列_ボタン１) */
+/* grid_B */
+/* === (書影３列_ボタン１) === */
 .grid_B {
   display: flex;
-  padding: 0 0.9rem;
+  padding: 0 1rem;
   flex-direction: column;
   align-items: center;
   gap: 2.8rem;
@@ -109,6 +113,7 @@ a {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+  padding: 2rem 0.5rem;
 }
 
 .grid_B .grid-item {
@@ -119,15 +124,38 @@ a {
   gap: 0.5rem;
 }
 
-/* detail */
-.detail_A h2,
-.detail_B h2 {
+.grid_B .grid-item .grid-item-button {
+  width: 100%;
+  display: flex;
+  padding: 0.8rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.5rem;
+  border: 1px solid #af3421;
+  background: #f64998;
+  box-shadow:
+    0px -3px 0px 0px #e83081 inset,
+    0px 1.5px 0px -2px #fffbad,
+    0px 1.5px 1.5px 0px rgba(251, 40, 40, 0.25);
+  color: #fff;
+  text-align: center;
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25);
+  -webkit-text-stroke-width: 0.4px;
+  -webkit-text-stroke-color: rgba(0, 0, 0, 0.5);
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%; /* 12.74px */
+}
+
+/* detail_A */
+/* === (テキスト内リンク有) === */
+.detail_A h2 {
   max-width: 280px;
   width: 100%;
 }
 
-.detail_A .detail-list,
-.detail_B .detail-list {
+.detail_A .detail-list {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -216,6 +244,18 @@ a {
   line-height: 180%; /* 21.6px */
 }
 
+/* detail_B */
+/* === (テキスト内リンク無) === */
+.detail_B h2 {
+  max-width: 280px;
+  width: 100%;
+}
+
+.detail_B .detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 .detail_B {
   position: relative;
   display: flex;
@@ -277,18 +317,4 @@ a {
   font-weight: 500;
   line-height: 18px; /* 150% */
   list-style: disc;
-}
-
-.detail_B .detail-item .notice-list {
-  width: 100%;
-  padding: 1.6rem 1.6rem 1.6rem calc(1.6rem + 1em);
-  border-radius: 1.6rem;
-  border: 0.5px solid #000;
-  background: #fff;
-  list-style: disc;
-  color: #232323;
-  font-size: 1.2rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 180%; /* 21.6px */
 }

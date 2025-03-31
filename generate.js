@@ -9,6 +9,10 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
+function escapeRegExp(str) {
+  return str.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&');
+}
+
 async function main() {
   const html = fs.readFileSync('./sample.html', 'utf-8');
   const $ = cheerio.load(html);
@@ -41,23 +45,12 @@ async function main() {
         originalHead.append(`<link rel="stylesheet" href="styled.css">`);
         newDoc('head').replaceWith(originalHead);
 
-        let classSet = new Set();
         let imageSet = new Set();
 
         selectedIds.forEach((id) => {
           const section = $(`#${id}`);
           if (section.length) {
             newDoc('.container').append(section.clone());
-
-            const rootClass = section.attr('class');
-            if (rootClass) {
-              rootClass.split(/\s+/).forEach((cls) => classSet.add(cls));
-            }
-
-            section.find('[class]').each((_, el) => {
-              const classes = ($(el).attr('class') || '').split(/\s+/);
-              classes.forEach((cls) => classSet.add(cls));
-            });
 
             section.find('img').each((_, img) => {
               const src = $(img).attr('src');
@@ -107,11 +100,15 @@ async function main() {
         let filteredCSS = '';
         if (fs.existsSync(cssPath)) {
           const cssContent = fs.readFileSync(cssPath, 'utf-8');
-          classSet.forEach((cls) => {
-            const regex = new RegExp(`\\.${cls}(\\s+[^{]+)?\\s*\\{[\\s\\S]*?\\}`, 'g');
-            const matches = cssContent.match(regex);
-            if (matches) {
-              filteredCSS += matches.join('\n\n') + '\n\n';
+          selectedIds.forEach((id) => {
+            const safeId = escapeRegExp(id);
+            const blockRegex = new RegExp(
+              `\\/\\*\\s*${safeId}\\s*\\*\\/\\n([\\s\\S]*?)(?=\\/\\*\\s*\\w+\\s*\\*\\/|$)`,
+              'g',
+            );
+            let match;
+            while ((match = blockRegex.exec(cssContent)) !== null) {
+              filteredCSS += `/* ${id} */\n` + match[1].trim() + '\n\n';
             }
           });
         }
@@ -144,8 +141,8 @@ async function main() {
           }
         });
 
-        const finalCSS = baseCSS + '\n\n' + (filteredCSS || '/* styles.css is empty */');
-        fs.writeFileSync(path.join(distDir, 'styles.css'), finalCSS, 'utf-8');
+        const finalCSS = baseCSS + '\n\n' + (filteredCSS || '/* styled.css is empty */');
+        fs.writeFileSync(path.join(distDir, 'styled.css'), finalCSS, 'utf-8');
 
         const prettyHtml = await prettier.format(newDoc.html(), { parser: 'html' });
         const finalHtml =
@@ -154,7 +151,7 @@ async function main() {
         fs.writeFileSync(path.join(distDir, 'index.html'), finalHtml, 'utf-8');
 
         console.log(`\n✅ dist/index.html を整形して出力しました`);
-        console.log(`🎨 styles.css に共通CSS + 使用セクションのCSSを出力しました`);
+        console.log(`🎨 styled.css に共通CSS + 指定IDブロックCSSを出力しました`);
         rl.close();
       },
     );
