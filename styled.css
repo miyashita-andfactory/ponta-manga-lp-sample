@@ -72,6 +72,18 @@ a {
   align-self: stretch;
 }
 
+/* mainVisual_A */
+/* === (画像内ボタン) === */
+.mainVisual_C {
+  position: relative;
+}
+
+.mainVisual_C .mainVisual-button {
+  position: absolute;
+  bottom: 3.2rem;
+  padding: 0 1.8rem;
+}
+
 /* grid_A */
 /* === (書影３列_ボタンなし) === */
 .grid_A {
