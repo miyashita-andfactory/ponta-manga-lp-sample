@@ -40,7 +40,7 @@ a {
   background: #eb340c;
 }
 
-.mainVisual_A .mainVisual-button {
+.mainVisual_A .mainVisual_button {
   display: flex;
   padding: 0 1.6rem 4rem 1.6rem;
   flex-direction: column;
@@ -55,7 +55,7 @@ a {
   background: #ff9d30;
 }
 
-.mainVisual_B .mainVisual-button-area {
+.mainVisual_B .mainVisual_button_area {
   display: flex;
   padding: 1.6rem;
   flex-direction: column;
@@ -65,7 +65,7 @@ a {
   align-self: stretch;
 }
 
-.mainVisual_B .mainVisual-anker-area {
+.mainVisual_B .mainVisual_anker_area {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.8rem;
@@ -78,7 +78,7 @@ a {
   position: relative;
 }
 
-.mainVisual_C .mainVisual-button {
+.mainVisual_C .mainVisual_button {
   position: absolute;
   bottom: 3.2rem;
   padding: 0 1.8rem;
@@ -94,18 +94,18 @@ a {
   gap: 1.6rem;
   background: #eec800;
 }
-.grid_A .grid-list {
+.grid_A .grid_list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.6rem 0.8rem;
   list-style: none;
 }
 
-.grid_A .grid-item {
+.grid_A .grid_item {
   border: 2px solid #420403;
 }
 
-.grid_A .grid-item img {
+.grid_A .grid_item img {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -120,7 +120,7 @@ a {
   gap: 1.6rem;
   background: #eec800;
 }
-.grid_A_frame .grid-list {
+.grid_A_frame .grid_list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.6rem 0.8rem;
@@ -130,11 +130,11 @@ a {
   background-color: #fff;
 }
 
-.grid_A_frame .grid-item {
+.grid_A_frame .grid_item {
   border: 2px solid #420403;
 }
 
-.grid_A_frame .grid-item img {
+.grid_A_frame .grid_item img {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -153,24 +153,31 @@ a {
   background-size: cover;
 }
 
-.grid_B .grid-list {
+.grid_B .grid_list_area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2.5rem 1rem;
+}
+
+.grid_B .grid_list {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  padding: 2.5rem 1rem;
   border-radius: 2rem;
-  background: #fff;
 }
 
-.grid_B .grid-item {
+.grid_B .grid_item {
   display: flex;
   padding: 0.25rem;
   flex-direction: column;
-  align-items: center;
   gap: 0.5rem;
 }
 
-.grid_B .grid-item .grid-item-button {
+.grid_B .grid_item .grid_item_button {
   width: 100%;
   display: flex;
   padding: 0.8rem;
@@ -194,6 +201,171 @@ a {
   line-height: 100%; /* 12.74px */
 }
 
+/* grid_B_frame */
+/* === (書影３列_ボタン１) === */
+.grid_B_frame {
+  display: flex;
+  padding: 3rem 1rem 7.5rem 1rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.8rem;
+  align-self: stretch;
+  background: url(./images/bg/bg1.png);
+  background-size: cover;
+}
+
+.grid_B_frame .grid_list_area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2.5rem 1rem;
+  border-radius: 2rem;
+  background: #fff;
+}
+
+.grid_B_frame .grid_list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.grid_B_frame .grid_item {
+  display: flex;
+  padding: 0.25rem;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.grid_B_frame .grid_item .grid_item_button {
+  width: 100%;
+  display: flex;
+  padding: 0.8rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.5rem;
+  border: 1px solid #af3421;
+  background: #f64998;
+  box-shadow:
+    0px -3px 0px 0px #e83081 inset,
+    0px 1.5px 0px -2px #fffbad,
+    0px 1.5px 1.5px 0px rgba(251, 40, 40, 0.25);
+  color: #fff;
+  text-align: center;
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25);
+  -webkit-text-stroke-width: 0.4px;
+  -webkit-text-stroke-color: rgba(0, 0, 0, 0.5);
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%; /* 12.74px */
+}
+
+/* grid_C */
+/* === (書影4列_ボタン１) === */
+.grid_C {
+  display: flex;
+  padding: 2.4rem 1.6rem;
+  flex-direction: column;
+  gap: 1.6rem;
+  background-color: #b4ffdc;
+}
+
+.grid_C .grid_list_area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  align-self: stretch;
+}
+
+.grid_C .grid_list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.6rem 0.8rem;
+  list-style: none;
+}
+
+.grid_C .grid_item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.grid_C .grid_item .grid_item_button {
+  display: flex;
+  padding: 1.2rem 0;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  color: #3c3c3c;
+  text-align: center;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 5px; /* 50% */
+  border-radius: 6px;
+  border: 1px solid rgba(60, 60, 60, 0.15);
+  background: #fff;
+}
+
+/* grid_C_frame */
+/* === (書影4列_ボタン１) === */
+.grid_C_frame {
+  display: flex;
+  padding: 2.4rem 1.6rem;
+  flex-direction: column;
+  gap: 1.6rem;
+  background-color: #b4ffdc;
+}
+
+.grid_C_frame .grid_list_area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  align-self: stretch;
+  padding: 3rem 1.5rem;
+  border-radius: 2rem;
+  background: #fff;
+}
+
+.grid_C_frame .grid_list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.6rem 0.8rem;
+  list-style: none;
+}
+
+.grid_C_frame .grid_item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.grid_C_frame .grid_item .grid_item_button {
+  display: flex;
+  padding: 1.2rem 0;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  color: #3c3c3c;
+  text-align: center;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 5px; /* 50% */
+  border-radius: 6px;
+  border: 1px solid rgba(60, 60, 60, 0.15);
+  background: #fff;
+}
+
 /* detail_A */
 /* === (テキスト内リンク有) === */
 .detail_A h2 {
@@ -201,7 +373,7 @@ a {
   width: 100%;
 }
 
-.detail_A .detail-list {
+.detail_A .detail_list {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -217,7 +389,7 @@ a {
   background: #c4c4c4;
 }
 
-.detail_A .detail-item {
+.detail_A .detail_item {
   position: relative;
   display: flex;
   margin-top: calc(16px + 8px);
@@ -232,11 +404,11 @@ a {
   background: #fff;
 }
 
-.detail_A .detail-item--notice {
+.detail_A .detail_item--notice {
   gap: 1.2rem;
 }
 
-.detail_A .detail-item h3 {
+.detail_A .detail_item h3 {
   position: absolute;
   top: -19px;
   display: flex;
@@ -253,7 +425,7 @@ a {
   line-height: 32px; /* 200% */
 }
 
-.detail_A .detail-item p {
+.detail_A .detail_item p {
   color: #420403;
   text-align: center;
   font-size: 1.4rem;
@@ -262,12 +434,12 @@ a {
   line-height: 24px; /* 171.429% */
 }
 
-.detail_A .detail-item a {
+.detail_A .detail_item a {
   color: #ff9123;
   text-decoration-line: underline;
 }
 
-.detail_A .detail-item .notice {
+.detail_A .detail_item .notice {
   color: #420403;
   font-size: 1.2rem;
   font-style: normal;
@@ -276,7 +448,7 @@ a {
   list-style: disc;
 }
 
-.detail_A .detail-item .notice-list {
+.detail_A .detail_item .notice-list {
   width: 100%;
   padding: 1.6rem 1.6rem 1.6rem calc(1.6rem + 1em);
   border-radius: 1.6rem;
@@ -297,7 +469,7 @@ a {
   width: 100%;
 }
 
-.detail_B .detail-list {
+.detail_B .detail_list {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -313,7 +485,7 @@ a {
   background: #420403;
 }
 
-.detail_B .detail-item {
+.detail_B .detail_item {
   position: relative;
   display: flex;
   margin-top: calc(16px + 8px);
@@ -327,11 +499,11 @@ a {
   background: #f8efe6;
 }
 
-.detail_B .detail-item--notice {
+.detail_B .detail_item--notice {
   gap: 1.2rem;
 }
 
-.detail_B .detail-item h3 {
+.detail_B .detail_item h3 {
   position: absolute;
   top: -19px;
   display: flex;
@@ -347,7 +519,7 @@ a {
   line-height: 32px; /* 200% */
 }
 
-.detail_B .detail-item p {
+.detail_B .detail_item p {
   color: #420403;
   text-align: center;
   font-size: 1.4rem;
@@ -356,7 +528,7 @@ a {
   line-height: 24px; /* 171.429% */
 }
 
-.detail_B .detail-item .notice {
+.detail_B .detail_item .notice {
   color: #420403;
   font-size: 1.2rem;
   font-style: normal;
